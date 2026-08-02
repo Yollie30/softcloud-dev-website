@@ -10,7 +10,7 @@
 
     <header class="navbar">
         <a href="index.html" class="logo-area">
-            <img src="Images/Softcloud dev logo.png" alt="SoftCloud Dev Logo" class="nav-logo">
+            <img src="Images/softcloud-logo.png" alt="SoftCloud Dev Logo" class="nav-logo">
             <span class="brand-name">SoftCloud Dev</span>
         </a>
         <nav class="nav-links">
@@ -82,7 +82,6 @@
                     <p style="color: #cccccc;">Redirecting you to the home page...</p>
                 </div>
             </div>
-        
 
         </div>
     </main>
@@ -94,7 +93,6 @@
                 <p class="footer-slogan">Elevating your business to the cloud.</p>
             </div>
             
-            
             <div class="footer-links">
                 <a href="index.html">Home</a>
                 <a href="about.html">About Us</a>
@@ -103,43 +101,46 @@
             </div>
         </div>
         
-        
         <div class="footer-bottom">
             <p>&copy; 2026 SoftCloud Dev. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
+      document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("my-form");
         const status = document.getElementById("status-message");
 
-        async function handleSubmit(event) {
+        if (form) {
+          form.addEventListener("submit", async function(event) {
             event.preventDefault();
             const data = new FormData(event.target);
-    
-            fetch(event.target.action, {
+            
+            try {
+              const response = await fetch(event.target.action, {
                 method: form.method,
                 body: data,
                 headers: {
                     'Accept': 'application/json'
                 }
-    }).then(response => {
-      if (response.ok) {
-        form.style.display = "none";
-        status.style.display = "block";
-        
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 3000);
-      } else {
-        alert("Oops! There was a problem submitting your form.");
-      }
-    }).catch(error => {
-      alert("Oops! There was a problem submitting your form.");
-    });
-  }
-  
-  form.addEventListener("submit", handleSubmit);
-</script>
+              });
+
+              if (response.ok) {
+                form.style.display = "none";
+                status.style.display = "block";
+                
+                setTimeout(() => {
+                  window.location.href = "index.html";
+                }, 3000);
+              } else {
+                alert("Oops! There was a problem submitting your form.");
+              }
+            } catch (error) {
+              alert("Oops! There was a problem submitting your form.");
+            }
+          });
+        }
+      });
+    </script>
 </body>
 </html>
